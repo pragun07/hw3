@@ -67,9 +67,13 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
-
-
+struct isEven 
+{
+    bool operator() (int val)
+    {
+        return val % 2 ==0;
+    }
+};
 
 int main(int argc, char* argv[])
 {
@@ -87,9 +91,27 @@ int main(int argc, char* argv[])
 
     // Test out your linked list code
 
+    //testing the splitting list function
+    int pivot=1;
+    Node* smaller= nullptr;
+    Node* larger = nullptr;
+    llpivot(head, smaller, larger, pivot);
 
+    cout << "Smaller list than pivot: ";
+    print(smaller);
+    cout << "Larger list than pivot: ";
+    print(larger);
 
-    
+    dealloc(smaller);
+    dealloc(larger);
+
+    //resetting head and testing the filter function
+    head= readList(argv[1]);
+    head= llfilter(head, isEven());
+    cout << "Filtered list is: ";
+    print(head);
+
+    dealloc(head);
     return 0;
 
 }
